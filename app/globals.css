@@ -1,0 +1,686 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #fff5e8;
+  --muted: #bdc7ee;
+  --night: #071531;
+  --night-soft: #14234b;
+  --lavender: #b9a8e8;
+  --lavender-bright: #d9ccff;
+  --card: rgba(94, 91, 151, 0.32);
+  --card-border: rgba(218, 204, 255, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--night);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 75% 2%, rgba(109, 111, 194, 0.28), transparent 28rem),
+    linear-gradient(180deg, #071532 0%, #101e46 52%, #07142e 100%);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #fff2bd;
+  outline-offset: 4px;
+}
+
+main {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.night-sky {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.night-sky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.38;
+  background-image:
+    radial-gradient(circle at 13% 12%, white 0 1px, transparent 1.5px),
+    radial-gradient(circle at 32% 7%, white 0 1px, transparent 1.5px),
+    radial-gradient(circle at 58% 17%, white 0 1px, transparent 1.5px),
+    radial-gradient(circle at 86% 25%, white 0 1px, transparent 1.5px),
+    radial-gradient(circle at 91% 8%, white 0 1px, transparent 1.5px);
+  background-size: 19rem 17rem;
+}
+
+.moon {
+  position: absolute;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  right: max(5vw, 2rem);
+  top: 5rem;
+  background:
+    radial-gradient(circle at 34% 38%, rgba(164, 167, 201, 0.45) 0 8%, transparent 9%),
+    radial-gradient(circle at 66% 62%, rgba(164, 167, 201, 0.3) 0 11%, transparent 12%),
+    linear-gradient(135deg, #fff6e6, #bec8ff);
+  box-shadow: 0 0 2.5rem rgba(217, 220, 255, 0.5), 0 0 7rem rgba(173, 168, 255, 0.25);
+  opacity: 0.88;
+}
+
+.horizon {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -15rem;
+  height: 29rem;
+  border-radius: 50% 50% 0 0;
+  background:
+    linear-gradient(180deg, rgba(122, 91, 177, 0.08), rgba(4, 14, 37, 0.92)),
+    radial-gradient(ellipse at 50% 0, rgba(198, 165, 244, 0.32), transparent 42%);
+  filter: blur(1px);
+}
+
+.star {
+  position: absolute;
+  color: #fff1c6;
+  opacity: 0.7;
+}
+
+.star-one {
+  top: 8%;
+  left: 7%;
+  font-size: 1.1rem;
+}
+
+.star-two {
+  top: 24%;
+  left: 44%;
+  font-size: 2rem;
+}
+
+.star-three {
+  top: 16%;
+  right: 31%;
+  font-size: 1rem;
+}
+
+.home-screen,
+.guide-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2rem, 72rem);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 2rem 0 3rem;
+}
+
+.brand-row,
+.guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: #17204b;
+  background: linear-gradient(145deg, #fff4d8, #c9c7ff);
+  font-family: var(--font-display), serif;
+  font-size: 1.25rem;
+}
+
+.help-pill,
+.help-link {
+  border: 1px solid rgba(255, 245, 232, 0.3);
+  background: rgba(6, 18, 47, 0.32);
+  color: var(--ink);
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.78rem;
+}
+
+.hero-copy {
+  max-width: 42rem;
+  margin: clamp(7rem, 18vh, 12rem) 0 3rem;
+}
+
+.eyebrow {
+  display: block;
+  color: var(--lavender-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.97;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(3.6rem, 8vw, 7.2rem);
+  max-width: 54rem;
+}
+
+.hero-copy > p {
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+  max-width: 38rem;
+  margin: 1.5rem 0 0;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 64rem;
+}
+
+.path-card {
+  --delay: 0ms;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  text-align: left;
+  gap: 1rem;
+  min-height: 9rem;
+  padding: 1.3rem;
+  border: 1px solid var(--card-border);
+  border-radius: 1.7rem;
+  color: var(--ink);
+  background:
+    linear-gradient(130deg, rgba(157, 139, 207, 0.34), rgba(52, 64, 117, 0.32)),
+    rgba(20, 28, 69, 0.56);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.16), 0 1.2rem 3rem rgba(1, 7, 27, 0.16);
+  backdrop-filter: blur(18px);
+  cursor: pointer;
+  animation: rise 0.65s both;
+  animation-delay: var(--delay);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.path-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(236, 225, 255, 0.58);
+  background:
+    linear-gradient(130deg, rgba(168, 145, 218, 0.43), rgba(59, 74, 132, 0.4)),
+    rgba(20, 28, 69, 0.6);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+.path-symbol {
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background: rgba(187, 171, 232, 0.12);
+  border: 1px solid rgba(219, 207, 255, 0.22);
+  color: #ddceff;
+  font-family: var(--font-display), serif;
+  font-size: 2rem;
+}
+
+.path-copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.path-copy strong {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 500;
+}
+
+.path-copy small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.arrow {
+  color: var(--lavender-bright);
+  font-size: 1.4rem;
+}
+
+.home-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  color: #8f9bc7;
+  font-size: 0.68rem;
+}
+
+.home-footer p {
+  margin: 0;
+  max-width: 40rem;
+  line-height: 1.6;
+}
+
+.home-footer button {
+  flex: none;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: #c4caff;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.guide-shell {
+  width: min(100% - 2rem, 46rem);
+}
+
+.guide-header > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.guide-header > div span {
+  color: var(--lavender-bright);
+  font-size: 1.2rem;
+}
+
+.guide-header > div strong {
+  font-family: var(--font-display), serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.back-button,
+.close-button {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(9, 21, 51, 0.45);
+  cursor: pointer;
+}
+
+.progress-track {
+  width: 100%;
+  height: 3px;
+  margin: 1.5rem 0 clamp(3rem, 9vh, 6rem);
+  border-radius: 2rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a99be1, #fff0cf);
+  transition: width 500ms ease;
+}
+
+.guide-card {
+  border: 1px solid var(--card-border);
+  border-radius: 2rem;
+  padding: clamp(1.5rem, 5vw, 3.2rem);
+  background:
+    linear-gradient(140deg, rgba(101, 92, 157, 0.36), rgba(20, 31, 77, 0.55)),
+    rgba(7, 18, 48, 0.64);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 2rem 5rem rgba(1, 6, 24, 0.3), inset 0 1px rgba(255, 255, 255, 0.12);
+  animation: cardIn 0.45s ease both;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+}
+
+.guide-card h2 {
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  max-width: 38rem;
+}
+
+.step-body {
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 1.4rem 0 2rem;
+  max-width: 38rem;
+}
+
+.guide-card h3 {
+  margin: 2rem 0 1rem;
+  font-size: 0.82rem;
+  color: #e5e5ff;
+}
+
+.option-list,
+.ground-list,
+.tiny-actions {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0 2rem;
+}
+
+.option-list button,
+.ground-list button,
+.tiny-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(204, 198, 241, 0.2);
+  border-radius: 1rem;
+  background: rgba(11, 24, 59, 0.42);
+  color: #e7e5f8;
+  padding: 1rem;
+  cursor: pointer;
+  transition: 150ms ease;
+}
+
+.option-list button:hover,
+.ground-list button:hover,
+.tiny-actions button:hover,
+.option-list button.selected,
+.ground-list button.done,
+.tiny-actions button.selected {
+  border-color: rgba(220, 207, 255, 0.58);
+  background: rgba(133, 116, 185, 0.32);
+}
+
+.option-list button span,
+.ground-list button span,
+.tiny-actions button span {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  border: 1px solid rgba(213, 209, 242, 0.38);
+  border-radius: 50%;
+  font-size: 0.68rem;
+}
+
+.breath-practice {
+  display: grid;
+  place-items: center;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.breath-orbit {
+  display: grid;
+  place-items: center;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #fff3d8, #b3ace5 58%, #6e70ba);
+  color: #17204b;
+  box-shadow: 0 0 0 1.2rem rgba(182, 169, 226, 0.08), 0 0 4rem rgba(198, 181, 244, 0.28);
+  transition: transform 2s ease-in-out;
+}
+
+.breath-practice.inhale .breath-orbit {
+  transform: scale(1.06);
+  transition-duration: 4s;
+}
+
+.breath-practice.exhale .breath-orbit {
+  transform: scale(0.82);
+  transition-duration: 6s;
+}
+
+.breath-orbit span {
+  font-family: var(--font-display), serif;
+  font-size: 1.6rem;
+}
+
+.breath-practice p {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  margin: 1.7rem 0 0;
+}
+
+.release-card {
+  margin: 2rem 0;
+  padding: 1.4rem;
+  border-left: 2px solid var(--lavender-bright);
+  background: rgba(129, 113, 180, 0.12);
+}
+
+.release-card span,
+.release-card small {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.release-card p {
+  font-family: var(--font-display), serif;
+  font-size: 1.6rem;
+  line-height: 1.25;
+}
+
+.guide-actions {
+  display: grid;
+  margin-top: 2rem;
+}
+
+.primary-action,
+.secondary-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 3.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(100deg, #eee3ff, #fff1d3);
+  color: #15204c;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.primary-action span {
+  font-size: 1.15rem;
+}
+
+.secondary-action {
+  border: 1px solid rgba(227, 215, 255, 0.5);
+  color: var(--ink);
+  background: rgba(132, 114, 182, 0.24);
+}
+
+.quiet-action,
+.text-action {
+  border: 0;
+  background: transparent;
+  color: #bcc4f0;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  cursor: pointer;
+}
+
+.completion-card {
+  text-align: center;
+}
+
+.completion-card .step-body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.completion-moon {
+  display: block;
+  color: #ffeac6;
+  font-family: var(--font-display), serif;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(2, 7, 22, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.crisis-panel {
+  position: relative;
+  width: min(100%, 36rem);
+  padding: clamp(1.5rem, 6vw, 3rem);
+  border: 1px solid var(--card-border);
+  border-radius: 2rem;
+  background: linear-gradient(145deg, #1d2859, #0c1938);
+  box-shadow: 0 2rem 7rem #020713;
+}
+
+.crisis-panel h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.05;
+}
+
+.crisis-panel > p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.close-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.3rem;
+}
+
+.crisis-actions {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+.location-note {
+  font-size: 0.68rem;
+}
+
+@media (max-width: 700px) {
+  .moon {
+    width: 8rem;
+    height: 8rem;
+    right: -1rem;
+    top: 5rem;
+  }
+
+  .home-screen,
+  .guide-shell {
+    width: min(100% - 1.5rem, 46rem);
+    padding-top: 1.2rem;
+  }
+
+  .hero-copy {
+    margin-top: 7rem;
+  }
+
+  h1 {
+    font-size: clamp(3.2rem, 15vw, 4.8rem);
+  }
+
+  .path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-card {
+    min-height: 7.6rem;
+    border-radius: 1.4rem;
+  }
+
+  .path-symbol {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .home-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .progress-track {
+    margin-bottom: 2rem;
+  }
+
+  .guide-card {
+    border-radius: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
